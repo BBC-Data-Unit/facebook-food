@@ -27,9 +27,12 @@ Once downloaded, we used deduplication techniques to remove entries that appeare
 
 ## Scripts
 
-R was used to clean and analyse the data. The four notebooks below include the code and outline the process:
+R was used to clean and analyse the data. The five notebooks below include the code and outline the process:
 
-* R notebook: 
-* R notebook: 
-* R notebook: 
-* R notebook: 
+* R notebook: [import and combine data](https://github.com/BBC-Data-Unit/facebook-food/blob/master/00codecheck.Rmd)
+* R notebook: [import and combine data, generate regional breakdown](https://github.com/BBC-Data-Unit/facebook-food/blob/master/01importfbmkt.Rmd)
+* R notebook: [remove duplicates](https://github.com/BBC-Data-Unit/facebook-food/blob/master/02fbmarketanaly.Rmd)
+* R notebook: [extract and count words, identify variations](https://github.com/BBC-Data-Unit/facebook-food/blob/master/03fbmarket_text.Rmd)
+* R notebook: [identify food-related listings](https://github.com/BBC-Data-Unit/facebook-food/blob/master/04fbmarket_textafterclean.Rmd)
+
+Subsequent analysis was performed in Excel.
