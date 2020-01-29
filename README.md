@@ -16,6 +16,7 @@ Once downloaded, we used deduplication techniques to remove entries that appeare
 * CSV: [combined data, with duplicate entries removed](https://github.com/BBC-Data-Unit/facebook-food/blob/master/scrape_dedup.csv)
 * CSV: [words used and counts](https://github.com/BBC-Data-Unit/facebook-food/blob/master/keywordcount.csv)
 * CSV: [place names appearing most often](https://github.com/BBC-Data-Unit/facebook-food/blob/master/topplaces.csv)
+* XLSX: [most common foods by area](https://github.com/BBC-Data-Unit/facebook-food/blob/master/foodbyregionCHECK.xlsx)
 
 ## Quotes and interviews
 
