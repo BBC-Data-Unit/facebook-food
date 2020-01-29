@@ -6,11 +6,14 @@ In December 2019 **Rob England** and **Paul Bradshaw** [reported](https://www.bb
 
 BBC analysis found more than 3,000 listings across the UK on Facebook Marketplace for "homemade food" on one day.
 
-In order to analyse listings, we had to download Facebook Marketplaces pages in Safari's 'web archive' format, then use command line to extract this into a HTML file, and then extract data from those files. The dynamic nature of the pages meant that information could not be extracted using other browsers or methods.
+In order to analyse listings, we had to download Facebook Marketplaces pages in Safari's 'web archive' format, then [use command line to extract this into a HTML file](https://github.com/BBC-Data-Unit/facebook-food/blob/master/convertwebarchive.sh), and then extract data from those files. The dynamic nature of the pages meant that information could not be extracted using other browsers or methods.
 
 Once downloaded, we used deduplication techniques to remove entries that appeared in Marketplace sections for different cities. 
 
 ## Get the data
+
+* CSVs: [scraped data for each city's Marketplace listings](https://github.com/BBC-Data-Unit/facebook-food/tree/master/scrapeddata)
+* CSV: [words used and counts](https://github.com/BBC-Data-Unit/facebook-food/blob/master/keywordcount.csv)
 
 ## Quotes and interviews
 
@@ -27,8 +30,9 @@ Once downloaded, we used deduplication techniques to remove entries that appeare
 
 ## Scripts
 
-R was used to clean and analyse the data. The five notebooks below include the code and outline the process:
+A shell script was used in command line to convert Safari's .webarchive format into HTML. R was used to clean and analyse the data. 
 
+* Shell script: [convert .webarchive to HTML](https://github.com/BBC-Data-Unit/facebook-food/blob/master/convertwebarchive.sh)
 * R notebook: [import and combine data](https://github.com/BBC-Data-Unit/facebook-food/blob/master/00codecheck.Rmd)
 * R notebook: [import and combine data, generate regional breakdown](https://github.com/BBC-Data-Unit/facebook-food/blob/master/01importfbmkt.Rmd)
 * R notebook: [remove duplicates](https://github.com/BBC-Data-Unit/facebook-food/blob/master/02fbmarketanaly.Rmd)
