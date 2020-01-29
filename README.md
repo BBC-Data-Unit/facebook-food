@@ -13,7 +13,9 @@ Once downloaded, we used deduplication techniques to remove entries that appeare
 ## Get the data
 
 * CSVs: [scraped data for each city's Marketplace listings](https://github.com/BBC-Data-Unit/facebook-food/tree/master/scrapeddata)
+* CSV: [combined data, with duplicate entries removed](https://github.com/BBC-Data-Unit/facebook-food/blob/master/scrape_dedup.csv)
 * CSV: [words used and counts](https://github.com/BBC-Data-Unit/facebook-food/blob/master/keywordcount.csv)
+* CSV: [place names appearing most often](https://github.com/BBC-Data-Unit/facebook-food/blob/master/topplaces.csv)
 
 ## Quotes and interviews
 
@@ -33,6 +35,7 @@ Once downloaded, we used deduplication techniques to remove entries that appeare
 A shell script was used in command line to convert Safari's .webarchive format into HTML. R was used to clean and analyse the data. 
 
 * Shell script: [convert .webarchive to HTML](https://github.com/BBC-Data-Unit/facebook-food/blob/master/convertwebarchive.sh)
+* XML: [OutWit Hub scraper](https://github.com/BBC-Data-Unit/facebook-food/blob/master/FB%20marketplace%20scraper.xml)
 * R notebook: [import and combine data](https://github.com/BBC-Data-Unit/facebook-food/blob/master/00codecheck.Rmd)
 * R notebook: [import and combine data, generate regional breakdown](https://github.com/BBC-Data-Unit/facebook-food/blob/master/01importfbmkt.Rmd)
 * R notebook: [remove duplicates](https://github.com/BBC-Data-Unit/facebook-food/blob/master/02fbmarketanaly.Rmd)
