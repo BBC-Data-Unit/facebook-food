@@ -1,0 +1,83 @@
+---
+title: "Importing and combining data"
+output: html_notebook
+---
+
+# Importing and combining data
+
+We've scraped data using OutWit Hub. This notebook details the process of importing that data in, reordering and cleaning where needed to ensure the structure is consistent, before combining into a single file for analysis in a second notebook.
+
+```{r}
+#Create a list of files
+data <- c("Bristol scrape_Facebook_Marketplace.csv", "Belfast scrape_Facebook_Marketplace.csv", "Belfast scrape_Facebook_Marketplace.csv", "Canterbury scrape_Facebook_Marketplace.csv", "Cardiff scrape_Facebook_Marketplace.csv", "Exeter scrape_Facebook_Marketplace.csv", "Inver scrape_Facebook_Marketplace.csv", "Leics scrape_Facebook_Marketplace.csv", "London scrape_Facebook_Marketplace.csv", "Manchester2 scrape_Facebook_Marketplace.csv", "Leeds scrape_Facebook_Marketplace.csv",  "Norwich scrape_Facebook_Marketplace.csv","Glasgow scrape_Facebook_Marketplace.csv", "Plymouth scrape_Facebook_Marketplace.csv", "Reading scrape_Facebook_Marketplace.csv")
+
+#This dataset is a problem and needs columns putting in the right order
+prob <- read.csv("data/Newcastle scrape_Facebook_Marketplace.csv", stringsAsFactors = F)
+#Reorganise columns
+prob <- prob[,c(1,4,2,5,6)]
+#Add missing col
+prob$Insideout <- "NO DATA"
+#Check
+colnames(prob)
+
+#Create a seed dataset
+seeddata <- read.csv("data/Belfast scrape_Facebook_Marketplace.csv", stringsAsFactors = F)
+#This data duplicates titles in the Img column
+seeddata$Img <- NA
+#Add the extra column that's in some later data
+#seeddata$insideout <- "NO DATA"
+
+#Add to that
+for(i in data){
+  print(i)
+  #Read in the data from the list
+  newdata <- read.csv(paste("data/",i,sep=""), stringsAsFactors = F)
+  #Check the columns
+  print(ncol(newdata))
+  print(colnames(newdata))
+  #We don't wand the Id column
+  if(colnames(newdata)[4] == "Id"){
+    newdata$Id <- NULL
+  }
+  #If it only has 5 cols then it needs the Insideout col
+  if(ncol(newdata) == 5){
+    newdata$Insideout <- "NO DATA"
+  }
+  #Combine with our seed data, over and over to make a combined dataset
+  seeddata <- rbind(seeddata, newdata)
+}
+
+#Add in the problematic data that was cleaned
+seeddata <- rbind(seeddata,prob)
+```
+
+Let's get an overview:
+
+```{r}
+head(seeddata)
+```
+
+And clean up the url column:
+
+```{r}
+seeddata$Source.Url <- gsub("file:///Users/paul/Dropbox/workInProgress/facebookmarketplace/webarchives/","",seeddata$Source.Url)
+seeddata$Source.Url <- gsub("%20Facebook%20Marketplace.html","",seeddata$Source.Url)
+seeddata$Source.Url <- gsub("file:///Users/paul/Dropbox/workInProgress/facebookmarketplace/html/","",seeddata$Source.Url)
+seeddata$Source.Url <- gsub("DONE/","",seeddata$Source.Url)
+table(seeddata$Source.Url)
+```
+
+The img column is unreliable, so let's delete:
+
+```{r}
+seeddata$Img <- NULL
+```
+
+
+We can now export that:
+
+```{r}
+write.csv(seeddata, "marketplacescrape.csv")
+```
+
+

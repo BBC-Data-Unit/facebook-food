@@ -1,0 +1,117 @@
+---
+title: "Code check"
+output: html_notebook
+---
+
+# Checking all the code
+
+First some code from notebook 1:
+
+```{r}
+#Create a list of files
+data <- c("Bristol scrape_Facebook_Marketplace.csv", "Belfast scrape_Facebook_Marketplace.csv", "Belfast scrape_Facebook_Marketplace.csv", "Canterbury scrape_Facebook_Marketplace.csv", "Cardiff scrape_Facebook_Marketplace.csv", "Exeter scrape_Facebook_Marketplace.csv", "Inver scrape_Facebook_Marketplace.csv", "Leics scrape_Facebook_Marketplace.csv", "London scrape_Facebook_Marketplace.csv", "Manchester2 scrape_Facebook_Marketplace.csv", "Leeds scrape_Facebook_Marketplace.csv",  "Norwich scrape_Facebook_Marketplace.csv","Glasgow scrape_Facebook_Marketplace.csv", "Plymouth scrape_Facebook_Marketplace.csv", "Reading scrape_Facebook_Marketplace.csv")
+
+#This dataset is a problem and needs columns putting in the right order
+prob <- read.csv("data/Newcastle scrape_Facebook_Marketplace.csv", stringsAsFactors = F)
+#Reorganise columns
+prob <- prob[,c(1,4,2,5,6)]
+#Add missing col
+prob$Insideout <- "NO DATA"
+#Check
+colnames(prob)
+
+#Create a seed dataset
+seeddata <- read.csv("data/Belfast scrape_Facebook_Marketplace.csv", stringsAsFactors = F)
+#This data duplicates titles in the Img column
+seeddata$Img <- NA
+#Add the extra column that's in some later data
+#seeddata$insideout <- "NO DATA"
+
+#Add to that
+for(i in data){
+  print(i)
+  #Read in the data from the list
+  newdata <- read.csv(paste("data/",i,sep=""), stringsAsFactors = F)
+  #Check the columns
+  print(ncol(newdata))
+  print(colnames(newdata))
+  #We don't wand the Id column
+  if(colnames(newdata)[4] == "Id"){
+    newdata$Id <- NULL
+  }
+  #If it only has 5 cols then it needs the Insideout col
+  if(ncol(newdata) == 5){
+    newdata$Insideout <- "NO DATA"
+  }
+  #Combine with our seed data, over and over to make a combined dataset
+  seeddata <- rbind(seeddata, newdata)
+}
+
+#Add in the problematic data that was cleaned
+seeddata <- rbind(seeddata,prob)
+```
+
+```{r}
+#Clean up URLs
+seeddata$Source.Url <- gsub("file:///Users/paul/Dropbox/workInProgress/facebookmarketplace/webarchives/","",seeddata$Source.Url)
+seeddata$Source.Url <- gsub("%20Facebook%20Marketplace.html","",seeddata$Source.Url)
+seeddata$Source.Url <- gsub("file:///Users/paul/Dropbox/workInProgress/facebookmarketplace/html/","",seeddata$Source.Url)
+seeddata$Source.Url <- gsub("DONE/","",seeddata$Source.Url)
+table(seeddata$Source.Url)
+```
+
+The img column is unreliable, so let's delete:
+
+```{r}
+seeddata$Img <- NULL
+```
+
+## Notebook 2
+
+We will adapt some of the code from notebook 2 so we can compare results separately:
+
+```{r}
+#Create a copy to work with
+testdata <- seeddata
+#Remove first column
+testdata <- testdata[c(-1)]
+```
+
+
+
+```{r}
+library(tidyverse)
+#Separate the Location column into 2 new columns, don't remove the original column
+testdata <- separate(testdata, Location, into = c("loconly","timestamp"), sep = " · ", remove = F,
+  convert = FALSE, extra = "warn", fill = "warn")
+```
+
+
+
+```{r}
+#Combine 4 cells to create a concatenated one
+testdata$alltext <- paste(testdata$Price, testdata$Title, testdata$Location, testdata$timestamp, sep=":")
+#adapted from https://stackoverflow.com/questions/24011246/deleting-rows-that-are-duplicated-in-one-column-based-on-the-conditions-of-anoth
+testdata = testdata[!duplicated(testdata$alltext),]
+
+```
+
+## Notebook 3
+
+```{r}
+#The keywords are in the Title column
+write.csv(testdata$Title, 'testlist.txt')
+keywords <- scan('testlist.txt', what="char", sep=",")
+# We convert all text to lower case to prevent any case sensitive issues with counting
+keywords <- tolower(keywords)
+keywords.split <- strsplit(keywords, " ")
+keywordsvec <- unlist(keywords.split)
+keywordstable <- table(keywordsvec)
+write.csv(keywordstable, 'testlist.csv')
+keywordtest <- read.csv('testlist.csv', stringsAsFactors = F)
+attach(keywordtest)
+keywordtest <- keywordtest[order(-Freq),]
+detach(keywordtest)
+head(keywordtest, 20)
+```
+

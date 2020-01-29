@@ -1,0 +1,226 @@
+---
+title: "After cleaning: analysing scraped data on Facebook Marketplace listings"
+output: html_notebook
+---
+
+# After cleaning: analysing scraped data on Facebook Marketplace listings
+
+*Note: this notebook follows work in the previous 3 noteboooks*.
+
+After we have cleaned the data in Excel, checking the top 40 against variations and adding new data, we re-import the new data:
+
+```{r import data}
+keywords.wmatches<- read.csv("keywordswmatches.csv",stringsAsFactors = F)
+```
+
+The new data includes some classification of words that indicate the item is not fresh food. Let's grab those:
+
+```{r check how many food words}
+#There are 11 non-food terms, and 74 that are food - the rest haven't been classified or are ambiguous
+table(keywords.wmatches$food)
+#subset to just those words, and select just the terms column
+nonfoodwords <- subset(keywords.wmatches, keywords.wmatches$food == F, select = keywordsvec)
+#Convert to a vector
+nonfoodwords <- nonfoodwords$keywordsvec
+```
+
+We can loop through those and test if they appear in the listings:
+
+```{r test if non food words appear}
+#Example code that returns TRUE or FALSE based on whether a column matches the regex .*[Hh]ouse.*
+scrapeddata.nodups$nonfood <- grepl(".*[Hh]ouse.*", scrapeddata.nodups$Title)
+#Show results
+table(scrapeddata.nodups$nonfood)
+
+#Notice that the capitals make a difference:
+scrapeddata.nodups$nonfood <- grepl(".*house.*", scrapeddata.nodups$Title)
+#Show results
+table(scrapeddata.nodups$nonfood)
+
+#So let's convert:
+scrapeddata.nodups$titlelower <- tolower(scrapeddata.nodups$Title)
+
+#Now we need to generate a piece of regex which includes all the words
+#Make it empty first:
+nonfoodregex = ""
+for(i in nonfoodwords){
+  nonfoodregex <- paste(nonfoodregex,".*",i,".*|",sep="")
+}
+#finally we need to remove the final pipe from that:
+nonfoodregex <- substr(nonfoodregex,1,nchar(nonfoodregex)-1)
+nonfoodregex
+
+#Now run with that:
+scrapeddata.nodups$nonfood <- grepl(nonfoodregex, scrapeddata.nodups$Title)
+table(scrapeddata.nodups$nonfood)
+```
+
+Let's repeat for food:
+
+
+```{r test for food words}
+#subset to just food words, and select just the terms column
+foodwords <- subset(keywords.wmatches, keywords.wmatches$food == T, select = keywordsvec)
+#Convert to a vector
+foodwords <- foodwords$keywordsvec
+#Add 'food'
+foodwords <- c(foodwords, "food")
+
+#Now we need to generate a piece of regex which includes all the words
+#Make it empty first:
+foodregex = ""
+for(i in foodwords){
+  foodregex <- paste(foodregex,".*",i,".*|",sep="")
+}
+#finally we need to remove the final pipe from that:
+foodregex <- substr(foodregex,1,nchar(foodregex)-1)
+foodregex
+
+#Now run with that:
+scrapeddata.nodups$food <- grepl(foodregex, scrapeddata.nodups$titlelower)
+table(scrapeddata.nodups$food)
+```
+
+We can now use that for a subset:
+
+```{r subset food only}
+foodonly <- subset(scrapeddata.nodups, scrapeddata.nodups$food == T)
+head(foodonly)
+```
+
+Straight away we can see a problem with adding 'food' to the list: "Home made shot blasting cabinet" which is caught by `.*hot.*`
+
+Let's try to fix that:
+
+```{r remove hot}
+#subset to just food words, and select just the terms column
+foodwords <- subset(keywords.wmatches, keywords.wmatches$food == T, select = keywordsvec)
+#Convert to a vector
+foodwords <- foodwords$keywordsvec
+#Look for which one is 'hot'
+foodwords
+#Check
+foodwords[16]
+#Remove
+foodwords <- foodwords[-16]
+
+#Now we need to generate a piece of regex which includes all the words
+#Make it empty first:
+foodregex = ""
+for(i in foodwords){
+  foodregex <- paste(foodregex,".*",i,".*|",sep="")
+}
+#finally we need to remove the final pipe from that:
+foodregex <- substr(foodregex,1,nchar(foodregex)-1)
+foodregex
+
+#Now run with that:
+scrapeddata.nodups$food <- grepl(foodregex, scrapeddata.nodups$titlelower)
+table(scrapeddata.nodups$food)
+```
+
+We are now down to just over 1000
+
+```{r show food only}
+foodonly <- subset(scrapeddata.nodups, scrapeddata.nodups$food == T)
+head(foodonly,40)
+```
+
+What about those which haven't been classified?
+
+
+```{r show unclassified}
+unknown <- subset(subset(scrapeddata.nodups, scrapeddata.nodups$food == F), scrapeddata.nodups$food == F)
+head(unknown,40)
+```
+
+There's a mix here and it'll be laborious to manually classify each. 
+
+## Generate a regional breakdown
+
+We have a broad figure now of how many entries feature the top food words - but what about each region?
+
+First let's get an overview of the numbers in each area.
+
+```{r count by location}
+sqldf::sqldf("SELECT loconly, COUNT(*) as count
+             FROM foodonly
+             GROUP BY loconly
+             ORDER BY count DESC")
+```
+
+Can we create a column for each food word?
+
+```{r create new df foodonly}
+#Create a new data frame based on foodonly
+foodbyregion <- foodonly
+#loop through foodwords
+for(i in foodwords ){
+  #Create a vector with the same name as the word
+  #Populate that vector with the results of running grepl with that word + .*
+  #Add that vector as a new column, to foodbyregion
+  foodbyregion <- cbind(foodbyregion,assign(i, grepl(paste(".*",i,".*",sep=""), foodbyregion$titlelower)))
+}
+#Rename the new columns so they show the keyword being matched
+colnames(foodbyregion)[12:length(foodbyregion)] <- foodwords
+colnames(foodbyregion)
+```
+
+We may need combined columns:
+
+```{r}
+#Check the columns for chicken
+colnames(foodbyregion)[c(13,55,76)]
+#Create a column which is TRUE for any of those columns
+foodbyregion$ALLCHICKEN <- (foodbyregion[,13]|foodbyregion[,55]|foodbyregion[,76])
+#Samosas?
+colnames(foodbyregion)[c(15,18,56,60,83,84,85,86,87,88,89)]
+
+```
+
+
+Let's see those word counts:
+
+```{r}
+#Test creation of a variable to store total TRUE
+chickencount <- as.vector(table(foodbyregion$chicken))[2]
+#Check which columns contain food names
+colnames(foodbyregion) 
+#Store those 
+foodcols <- colnames(foodbyregion)[12:91]
+#Create an empty vector to store the counts of each
+foodcounts <- c()
+#Loop through the same indexes
+for(i in seq(12,91)){
+  #Grab the TRUE count for the column at that index
+  countof <- as.vector(table(foodbyregion[,i]))[2]
+  #print(countof)
+  #Add it to the ongoing vector of counts
+  foodcounts <- c(foodcounts,countof)
+}
+#Create a new data frame of the results
+foodcountsdf <- data.frame(foodcols, foodcounts)
+```
+
+
+```{r}
+
+```
+
+
+Yes. Let's export it.
+
+```{r export csv}
+write_csv(foodbyregion,"foodbyregion.csv")
+write_csv(foodcountsdf,"foodcountsdf.csv")
+```
+
+
+
+## What comes after 'home made'?
+
+```{r words after home made}
+head(scrapeddata.nodups$Title)
+gsub('.*[Mm]ade','',head(scrapeddata.nodups$titlelower))
+```
+

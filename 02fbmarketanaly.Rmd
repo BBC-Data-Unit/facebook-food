@@ -1,0 +1,106 @@
+---
+title: "Analysing scraped data on Facebook Marketplace listings"
+output: html_notebook
+---
+
+# Analysing scraped data on Facebook Marketplace listings
+
+We've scraped data using OutWit Hub. Now we import it in:
+
+```{r}
+scrapeddata <- read.csv("marketplacescrape.csv", stringsAsFactors = F)
+```
+
+This is what it looks like:
+
+```{r}
+head(scrapeddata)
+```
+
+Let's delete that first column:
+
+```{r}
+scrapeddata <- scrapeddata[c(-1)]
+head(scrapeddata)
+```
+
+And let's split the location column, which has 2 different pieces of data:
+
+```{r}
+head(scrapeddata$Location)
+```
+
+We [need the `separate()` function](https://tidyr.tidyverse.org/reference/separate.html) from the Tidyverse for the next bit:
+
+```{r}
+library(tidyverse)
+#Separate the Location column into 2 new columns, don't remove the original column
+scrapeddata <- separate(scrapeddata, Location, into = c("loconly","timestamp"), sep = " · ", remove = F,
+  convert = FALSE, extra = "warn", fill = "warn")
+```
+
+And let's show a table of results:
+
+```{r}
+#Create a dataframe from a table of results
+places <- data.frame(table(scrapeddata$loconly))
+#attach it to sort
+attach(places)
+#sort by the Freq column
+places <- places[order(-Freq),]
+#detach
+detach(places)
+#Show the results
+head(places, 20)
+```
+
+## Removing duplicates
+
+We do have a lot of entries which appear in multiple searches, however, so let's try to remove those.
+
+First we need to create a way of uniquely identifying each entry - this can simply be a combination of all the information:
+
+```{r}
+#Combine 4 cells to create a concatenated one
+scrapeddata$alltext <- paste(scrapeddata$Price, scrapeddata$Title, scrapeddata$Location, scrapeddata$timestamp, sep=":")
+```
+
+Next we ask to remove duplicates using [the `duplicated()` function](https://www.datanovia.com/en/lessons/identify-and-remove-duplicate-data-in-r/):
+
+```{r}
+#adapted from https://stackoverflow.com/questions/24011246/deleting-rows-that-are-duplicated-in-one-column-based-on-the-conditions-of-anoth
+scrapeddata.nodups = scrapeddata[!duplicated(scrapeddata$alltext),]
+```
+
+This leaves us with around 3,000 entries - removing more than 5,000 duplicates.
+
+(A better approach would be to use the listing ID but the scraping didn't always capture this.)
+
+Now repeat the places analysis:
+
+```{r}
+#Create a dataframe from a table of results
+places <- data.frame(table(scrapeddata.nodups$loconly))
+#attach it to sort
+attach(places)
+#sort by the Freq column
+places <- places[order(-Freq),]
+#detach
+detach(places)
+#Show the results
+head(places, 20)
+```
+
+That looks much more like what we are seeing on the pages.
+
+Let's export that too:
+
+```{r}
+write.csv(places, "topplaces.csv")
+```
+
+
+
+## Extracting the words
+
+Next we analyse the text - this is done in a separate notebook.

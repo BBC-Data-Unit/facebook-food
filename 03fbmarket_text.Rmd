@@ -1,0 +1,292 @@
+---
+title: "Analysing scraped data on Facebook Marketplace listings"
+output: html_notebook
+---
+
+# Counting text in scraped data on Facebook Marketplace listings
+
+We've scraped data using OutWit Hub and imported it in a separate notebook. This notebook focuses on the text analysis.
+
+## Extracting the words
+
+These steps are adapted from a [previous notebook](https://github.com/BBC-Data-Unit/art-uk/blob/master/keyword_counting.Rmd):
+
+```{r}
+#The keywords are in the Title column
+write.csv(scrapeddata.nodups$Title, 'keywordsastext.txt')
+```
+
+Now we re-import that data as a character object using `scan`:
+
+```{r}
+keywords <- scan('keywordsastext.txt', what="char", sep=",")
+# We convert all text to lower case to prevent any case sensitive issues with counting
+keywords <- tolower(keywords)
+#Remove brackets, ampersands and numbers
+keywords <- gsub("[()]","",keywords)
+keywords <- gsub("[&]"," ",keywords)
+keywords <- gsub("[£]","",keywords)
+keywords <- gsub("[/]"," ",keywords)
+keywords <- gsub("[-]"," ",keywords)
+keywords <- gsub("[!]"," ",keywords)
+keywords <- gsub("[,]"," ",keywords)
+keywords <- gsub("[.]"," ",keywords)
+keywords <- gsub("[']"," ",keywords)
+keywords <- gsub("[0-9]","",keywords)
+```
+
+We now need to put this through a series of conversions before we can generate a table:
+
+```{r}
+keywords.split <- strsplit(keywords, " ")
+keywordsvec <- unlist(keywords.split)
+keywordstable <- table(keywordsvec)
+```
+
+That table is enough to create a CSV from:
+
+```{r}
+write.csv(keywordstable, 'keywordcount.csv')
+```
+
+## String distance for cleaning
+
+Import that data as a data frame:
+
+```{r}
+keyworddata <- read.csv('keywordcount.csv', stringsAsFactors = F)
+```
+
+First, sort the data to bring the most common terms to the top:
+
+```{r sort biggest to smallest}
+attach(keyworddata)
+keyworddata <- keyworddata[order(-Freq),]
+detach(keyworddata)
+head(keyworddata, 20)
+```
+
+Some rows we don't want: the first row is 'no keyword' (where elements have been replaced with nothing). Let's remove that:
+
+```{r}
+#Remove the first row
+keyworddata <- keyworddata[-1,]
+head(keyworddata, 20)
+```
+
+
+Let's also remove 'homemade', 'home made' and 'food' as these are all irrelevant to the analysis:
+
+```{r}
+keyworddata <- keyworddata[-1:-4,]
+head(keyworddata, 30)
+```
+
+The "and", "for", and "with" could all be removed by index too...
+
+...But this wouldn't be the same for each data frame. So let's replace them by matching them:
+
+```{r}
+#Find the index of the match
+match("and", keyworddata$keywordsvec)
+#Use that to remove that row
+keyworddata <- keyworddata[-match("and", keyworddata$keywordsvec),]
+#Check results
+head(keyworddata, 20)
+```
+
+We need to repeat this for the others. There are so many, it could be more efficient to look for a list of 'stopwords' that we can loop through and exclude.
+
+The [stopwords package](https://github.com/quanteda/stopwords) is one source of such a list.
+
+```
+if(!require(stopwords)){
+  install.packages("stopwords")  
+}
+library(stopwords)
+
+#We can print a list
+stopwords::stopwords(language = "en",source = "snowball")
+
+#Loop through that list
+for(i in stopwords::stopwords(language = "en",source = "snowball")){
+  #Match and remove it
+  keyworddata <- keyworddata[-match(i, keyworddata$keywordsvec),]
+}
+#Check results
+head(keyworddata, 40)
+```
+
+...But doing this removes all words, so a manual approach may be better given that we are only interested in the top 30 or so:
+
+```{r remove stopwords}
+keyworddata <- keyworddata[-match("for", keyworddata$keywordsvec),]
+keyworddata <- keyworddata[-match("to", keyworddata$keywordsvec),]
+keyworddata <- keyworddata[-match("of", keyworddata$keywordsvec),]
+keyworddata <- keyworddata[-match("in", keyworddata$keywordsvec),]
+keyworddata <- keyworddata[-match("or", keyworddata$keywordsvec),]
+keyworddata <- keyworddata[-match("on", keyworddata$keywordsvec),]
+keyworddata <- keyworddata[-match("a", keyworddata$keywordsvec),]
+keyworddata <- keyworddata[-match("all", keyworddata$keywordsvec),]
+keyworddata <- keyworddata[-match("the", keyworddata$keywordsvec),]
+head(keyworddata, 40)
+```
+
+Let's export that again:
+
+```{r}
+write.csv(keyworddata, "keyworddata.csv")
+```
+
+
+## Variations in wording
+
+We can see with the top 30 that 'samosa' and 'samosas' both appear - so we can use the top 20 as a basis to look for close matches elsewhere.
+
+[The `stringdist` package](https://cran.r-project.org/web/packages/stringdist/stringdist.pdf) allows us to identify distances between strings (i.e. how many characters you would need to change) and the string with the closest distance:
+
+```{r}
+if(!require(stringr)){
+  install.packages("stringdist")
+  }
+library(stringdist)
+```
+
+Try the `amatch` function:
+
+```{r}
+nearmatch <- stringdist::amatch(keyworddata$keywordsvec,keyworddata$keywordsvec,maxDist=3)
+#We can't set a minDist - here's the help:
+?amatch
+```
+
+We might try [a different approach](https://www.r-bloggers.com/natural-language-processing-in-r-edit-distance/) then:
+
+Now we create a function to match:
+
+```{r}
+#Create the function
+clean_name = function(raw_name, teamlist)
+{
+    #optional
+    require(stringr)
+    raw_name = str_trim(raw_name)
+    
+    #necessary
+    ed_dist = adist(raw_name, teamlist)
+    best = which(ed_dist == min(ed_dist))[1] # [1] breaks ties
+    matchname <- teamlist[best]
+    matchindex <- best
+    return(c(matchname,matchindex)) # Return the best fitting name
+}
+```
+
+And then use it:
+
+```{r}
+#Create an empty vector to store results
+matchlist <- c()
+matchcounts <- c()
+#Run the function
+for(i in keyworddata$keywordsvec[1:20]){
+  print(i)
+  #Find the nearest match
+ nearestmatch_and_bestindex <- clean_name(i, keyworddata$keywordsvec[21:757])
+ print(nearestmatch_and_bestindex)
+ #Add it to the vector
+ matchlist <- c(matchlist, nearestmatch_and_bestindex[1])
+ #The vector coerces the number to a string because the other element is a string
+ #So we need to convert it
+ matchcounts <- as.numeric(c(matchcounts, nearestmatch_and_bestindex[2]))
+}
+```
+
+
+```{r}
+#Create new dataframe
+top20 <- head(keyworddata, 20)
+#Add to data frame
+top20$nearmatch <- matchlist
+#Create dataframe of the rest
+matchdata <- keyworddata$Freq[21:757]
+#Create an empty vector to store results
+allcounts <- c()
+#Loop through the indexes stored in the chunk above
+for(i in matchcounts){
+  #Print the index
+  print(matchdata[i])
+  #add to the vector by accessing the data at that index in matchdata
+  allcounts <- c(allcounts, matchdata[i])
+}
+#Assign the new vector of 20 matches, as a new column
+top20$matchcounts <- allcounts
+#Show the whole data frame
+top20
+```
+
+We can see that some matches are useful - chicken and chiken, for example - but most are not - e.g. house and horse.
+
+We now have to manually combine the ones that we want.
+
+We might also look at words that occur together alphabetically, e.g. curry and curries.
+
+Let's do this for the top 40:
+
+```{r}
+#Create an empty vector to store results
+matchlist <- c()
+matchcounts <- c()
+#Run the function
+for(i in keyworddata$keywordsvec[1:40]){
+  print(i)
+  #Find the nearest match
+ nearestmatch_and_bestindex <- clean_name(i, keyworddata$keywordsvec[41:757])
+ print(nearestmatch_and_bestindex)
+ #Add it to the vector
+ matchlist <- c(matchlist, nearestmatch_and_bestindex[1])
+ #The vector coerces the number to a string because the other element is a string
+ #So we need to convert it
+ matchcounts <- as.numeric(c(matchcounts, nearestmatch_and_bestindex[2]))
+}
+
+
+#Create new dataframe
+top40 <- head(keyworddata, 40)
+#Add to data frame
+top40$nearmatch <- matchlist
+#Create dataframe of the rest
+matchdata <- keyworddata$Freq[41:757]
+#Create an empty vector to store results
+allcounts <- c()
+#Loop through the indexes stored in the code above
+for(i in matchcounts){
+  #Print the index
+  print(matchdata[i])
+  #add to the vector by accessing the data at that index in matchdata
+  allcounts <- c(allcounts, matchdata[i])
+}
+#Assign the new vector of 20 matches, as a new column
+top40$matchcounts <- allcounts
+#Show the whole data frame
+top40
+```
+
+Let's export this along with all the other words:
+
+```{r}
+#Create new data frame with all the keywords outside the top 40
+not40<-(keyworddata[c(41:length(keyworddata$Freq)),])
+#Add the 2 columns that it will need to combine with the top40 matches df
+not40$nearmatch <- ""
+not40$matchcounts <- ""
+#Combine the two
+keywords.wmatches <- rbind(top40, not40)
+#Export
+write.csv(keywords.wmatches, "keywordswmatches.csv")
+```
+
+## Manual editing
+
+The next stage is done in Excel: checking the top 40 against variations and adding new data...
+
+...Once that's done, we re-import the new data - in a new notebook...
