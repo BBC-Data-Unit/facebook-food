@@ -1,0 +1,71 @@
+<outwitAutomator>
+<documentproperties>
+<active>true</active>
+<url>file://</url>
+<masterId>{deed2fbb-9869-4065-b5b8-e27abe101165}</masterId>
+<name>FB marketplace</name>
+<version>1.0</version>
+<versionId>{deed2fbb-9869-4065-b5b8-e27abe101165}</versionId>
+<automatorType>scraper</automatorType>
+<kernelVersion>8.0.0.58</kernelVersion>
+<creationOutfit>OutWit Hub</creationOutfit>
+<author />
+<company />
+<created>2019-11-13T10:54:4600:00</created>
+<lastModified>2019-11-20T10:45:2700:00</lastModified>
+<comments />
+<options /><hash>JV0vbhUpsOA6yROIVfDSmA==</hash>
+</documentproperties>
+<data>
+<line>
+<ok>true</ok>
+<description>Price</description>
+<before>&lt;p class="p27"&gt;</before>
+<after>&lt;/a</after>
+<format></format>
+<replace></replace>
+<separator></separator>
+<labels></labels>
+</line>
+<line>
+<ok>true</ok>
+<description>id</description>
+<before>&lt;p class="p13"&gt;&lt;span class="s3"&gt;&lt;a href="</before>
+<after>"&gt;</after>
+<format></format>
+<replace></replace>
+<separator>"&gt;</separator>
+<labels>id,img</labels>
+</line>
+<line>
+<ok>true</ok>
+<description>img</description>
+<before>"&gt;&lt;img src="file:///</before>
+<after>"&gt;&lt;span class="s18"&gt;</after>
+<format></format>
+<replace></replace>
+<separator></separator>
+<labels></labels>
+</line>
+<line>
+<ok>true</ok>
+<description>Title</description>
+<before>&lt;p class="p28"&gt;</before>
+<after>&lt;/span</after>
+<format></format>
+<replace></replace>
+<separator></separator>
+<labels></labels>
+</line>
+<line>
+<ok>true</ok>
+<description>Location</description>
+<before>&lt;p class="p29"&gt;</before>
+<after>&lt;/span</after>
+<format></format>
+<replace></replace>
+<separator></separator>
+<labels></labels>
+</line>
+</data>
+</outwitAutomator>
