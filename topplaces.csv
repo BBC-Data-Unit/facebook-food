@@ -1,0 +1,643 @@
+"","Var1","Freq"
+"356","London, England",236
+"376","Manchester, England",107
+"67","Birmingham, England",97
+"83","Bradford, England",88
+"363","Luton, England",81
+"516","Slough, England",73
+"96","Bristol, England",51
+"70","Blackburn, England",49
+"503","Sheffield, England",43
+"340","Leicester, England",38
+"243","Glasgow, Scotland",37
+"312","Ilford, England",37
+"410","Newcastle upon Tyne, England",34
+"423","Norwich, England",31
+"424","Nottingham, England",30
+"427","Oldham, England",30
+"338","Leeds, England",27
+"122","Cardiff, Wales",26
+"590","Walsall, England",23
+"404","Nelson, England",22
+"152","Colchester, England",20
+"542","Stoke-on-Trent, England",20
+"163","Coventry, England",19
+"421","Northampton, England",19
+"51","Belfast, Northern Ireland",18
+"132","Cheltenham, England",18
+"173","Croydon, England",18
+"468","Reading, England",18
+"77","Bolton, England",17
+"182","Derby, England",17
+"188","Doncaster, England",17
+"282","Hayes, England",17
+"556","Swindon, England",17
+"212","Edinburgh, Scotland",16
+"305","Hounslow, England",16
+"247","Gloucester, England",15
+"95","Brighton, England",14
+"350","Liverpool, England",14
+"50","Bedford, England",13
+"81","Bournemouth, England",13
+"452","Poole, England",13
+"36","Barking, England",12
+"443","Peterborough, England",12
+"483","Rotherham, England",12
+"522","Southampton, England",12
+"21","Ashford, England",11
+"101","Bromyard, England",11
+"267","Halifax, England",11
+"293","High Wycombe, England",11
+"447","Plymouth, England",11
+"541","Stockton-on-Tees, England",11
+"555","Swansea, Wales",11
+"605","Wembley, England",11
+"632","Wolverhampton, England",11
+"642","York, England",11
+"69","Bishops Stortford, England",10
+"111","Bury St Edmunds, England",10
+"139","Chippenham, England",10
+"221","Exeter, England",10
+"307","Huddersfield, England",10
+"316","Ipswich, England",10
+"379","March, England",10
+"395","Milton Keynes, England",10
+"481","Romford, England",10
+"492","Salisbury, England",10
+"518","Solihull, England",10
+"549","Sunderland, England",10
+"71","Blackpool, England",9
+"265","Halesowen, England",9
+"392","Middlesbrough, England",9
+"478","Rochdale, England",9
+"479","Rochester, England",9
+"45","Batley, England",8
+"64","Bingley, England",8
+"80","Boston, England",8
+"146","Clacton-on-Sea, England",8
+"224","Falkirk, Scotland",8
+"256","Grays, England",8
+"274","Harrow, England",8
+"308","Hull, England",8
+"321","Johnstone, Scotland",8
+"42","Basildon, England",7
+"121","Canvey Island, England",7
+"185","Dewsbury, England",7
+"238","Gateshead, England",7
+"292","Heywood, England",7
+"346","Lincoln, England",7
+"413","Newport, Wales",7
+"431","Oxford, England",7
+"460","Preston, England",7
+"466","Ramsgate, England",7
+"523","Southend-on-Sea, England",7
+"534","Staines, England",7
+"611","Weston-super-Mare, England",7
+"612","Weymouth, England",7
+"625","Wirral, England",7
+"39","Barnsley, England",6
+"68","Bishop Auckland, England",6
+"114","Caerphilly, Wales",6
+"120","Canterbury, England",6
+"203","Durham, England",6
+"232","Ferryhill, England",6
+"252","Gosport, England",6
+"362","Lowestoft, England",6
+"373","Maidstone, England",6
+"378","Mansfield, England",6
+"429","Orpington, England",6
+"546","Stroud, England",6
+"587","Wakefield, England",6
+"637","Worksop, England",6
+"117","Cambridge, England",5
+"124","Carlisle, England",5
+"129","Chatham, England",5
+"131","Chelmsford, England",5
+"170","Crewe, England",5
+"218","Epsom, England",5
+"231","Ferndown, England",5
+"255","Gravesend, England",5
+"259","Great Yarmouth, England",5
+"263","Guildford, England",5
+"289","Hereford, England",5
+"303","Horsham, England",5
+"306","Hove, England",5
+"314","Ilkeston, England",5
+"315","Inverness, Scotland",5
+"327","King's Lynn, England",5
+"375","Malton, England",5
+"425","Nuneaton, England",5
+"456","Portsmouth, England",5
+"474","Rhyl, Wales",5
+"596","Warrington, England",5
+"601","Wellingborough, England",5
+"609","Westcliff-on-Sea, England",5
+"630","Woking, England",5
+"633","Woodbridge, England",5
+"634","Woodford Green, England",5
+"13","Alnwick, England",4
+"24","Aylesbury, England",4
+"44","Bath, England",4
+"52","Benfleet, England",4
+"56","Bexhill on Sea, England",4
+"89","Bridgend, Wales",4
+"110","Burton upon Trent, England",4
+"119","Cannock, England",4
+"135","Chester, England",4
+"168","Crawley, England",4
+"180","Dartford, England",4
+"183","Dereham, England",4
+"195","Dudley, England",4
+"202","Dunstable, England",4
+"226","Fareham, England",4
+"233","Fleetwood, England",4
+"234","Folkestone, England",4
+"261","Greenock, Scotland",4
+"269","Hamilton, Scotland",4
+"272","Harlow, England",4
+"275","Hartlepool, England",4
+"279","Havant, England",4
+"339","Leek, England",4
+"391","Mexborough, England",4
+"408","Newbiggin by the Sea, England",4
+"417","Newtownabbey, Northern Ireland",4
+"448","Pontefract, England",4
+"475","Richmond, England",4
+"485","Rugby, England",4
+"491","Salford, England",4
+"496","Scarborough, England",4
+"502","Sheerness, England",4
+"514","Skelmersdale, England",4
+"527","Spennymoor, England",4
+"531","St Helens, England",4
+"538","Stevenage, England",4
+"547","Sudbury, England",4
+"551","Sutton Coldfield, England",4
+"553","Sutton, England",4
+"560","Telford, England",4
+"598","Waterlooville, England",4
+"606","West Bromwich, England",4
+"626","Wisbech, England",4
+"3","Aberdeen, Scotland",3
+"4","Aberystwyth, Wales",3
+"7","Airdrie, Scotland",3
+"16","Andover, England",3
+"18","Armagh, Northern Ireland",3
+"25","Ayr, Scotland",3
+"30","Ballymena, Northern Ireland",3
+"37","Barnard Castle, England",3
+"40","Barnstaple, England",3
+"46","Beaconsfield, England",3
+"74","Blandford Forum, England",3
+"76","Bognor Regis, England",3
+"84","Braintree, England",3
+"88","Brentwood, England",3
+"91","Bridgwater, England",3
+"107","Burnley, England",3
+"116","Camberley, England",3
+"136","Chesterfield, England",3
+"177","Dagenham, England",3
+"189","Dorchester, England",3
+"192","Downham Market, England",3
+"196","Dumfries, Scotland",3
+"208","Eastbourne, England",3
+"214","Ely, England",3
+"216","England",3
+"219","Erith, England",3
+"220","Evesham, England",3
+"241","Gillingham, England",3
+"245","Glenrothes, Scotland",3
+"248","Godalming, England",3
+"277","Hastings, England",3
+"285","Helston, England",3
+"297","Hoddesdon, England",3
+"304","Houghton le Spring, England",3
+"311","Hythe, England",3
+"313","Ilfracombe, England",3
+"318","Isleworth, England",3
+"323","Kettering, England",3
+"326","Kilmarnock, Scotland",3
+"337","Leamington Spa, England",3
+"342","Leominster, England",3
+"361","Loughton, England",3
+"366","Lymington, England",3
+"369","Macclesfield, England",3
+"372","Maidenhead, England",3
+"388","Melksham, England",3
+"407","Newark, England",3
+"442","Perth, Scotland",3
+"449","Pontyclun, Wales",3
+"465","Rainham, England",3
+"467","Rayleigh, England",3
+"469","Redcar, England",3
+"472","Redruth, England",3
+"480","Rochford, England",3
+"482","Romney Marsh, England",3
+"499","Seaford, England",3
+"504","Shepton Mallet, England",3
+"507","Shipston on Stour, England",3
+"512","Sittingbourne, England",3
+"520","South Shields, England",3
+"528","St Albans, England",3
+"529","St Austell, England",3
+"533","Stafford, England",3
+"540","Stockport, England",3
+"545","Stratford upon Avon, England",3
+"552","Sutton in Ashfield, England",3
+"558","Taunton, England",3
+"561","Tenbury Wells, England",3
+"563","Tewkesbury, England",3
+"565","Thetford, England",3
+"579","Truro, England",3
+"583","Ulverston, England",3
+"589","Wallingford, England",3
+"592","Walton-on-Thames, England",3
+"595","Wareham, England",3
+"597","Washington, England",3
+"600","Wednesbury, England",3
+"627","Wishaw, Scotland",3
+"641","Yarm, England",3
+"5","Abingdon, England",2
+"6","Addlestone, England",2
+"8","Aldershot, England",2
+"11","Alfreton, England",2
+"12","Alloa, Scotland",2
+"17","Annan, Scotland",2
+"19","Arundel, England",2
+"38","Barnet, England",2
+"43","Basingstoke, England",2
+"47","Beaminster, England",2
+"59","Bideford, England",2
+"61","Billericay, England",2
+"78","Bootle, England",2
+"79","Borehamwood, England",2
+"82","Bracknell, England",2
+"85","Brandon, England",2
+"90","Bridgnorth, England",2
+"104","Bude, England",2
+"106","Burgess Hill, England",2
+"109","Burntwood, England",2
+"112","Bury, England",2
+"115","Calne, England",2
+"123","Cardigan, Wales",2
+"125","Carrickfergus, Northern Ireland",2
+"134","Chester le Street, England",2
+"138","Chigwell, England",2
+"142","Chorley, England",2
+"143","Christchurch, England",2
+"149","Clitheroe, England",2
+"154","Coleraine, Northern Ireland",2
+"157","Congleton, England",2
+"161","Corby, England",2
+"162","Corsham, England",2
+"165","Craigavon, Northern Ireland",2
+"172","Crowborough, England",2
+"175","Cupar, Scotland",2
+"176","Cwmbran, Wales",2
+"179","Darlington, England",2
+"184","Devizes, England",2
+"186","Didcot, England",2
+"187","Diss, England",2
+"191","Dover, England",2
+"193","Driffield, England",2
+"194","Droitwich, England",2
+"197","Dunbar, Scotland",2
+"198","Dundee, Scotland",2
+"199","Dunfermline, Scotland",2
+"201","Dunmow, England",2
+"209","Eastleigh, England",2
+"215","Enfield, England",2
+"222","Exmouth, England",2
+"223","Eye, England",2
+"225","Falmouth, England",2
+"229","Feltham, England",2
+"240","Gerrards Cross, England",2
+"242","Girvan, Scotland",2
+"268","Halstead, England",2
+"286","Hemel Hempstead, England",2
+"301","Hook, England",2
+"310","Huntingdon, England",2
+"322","Keighley, England",2
+"324","Kidderminster, England",2
+"328","Kingston upon Thames, England",2
+"329","Kingswinford, England",2
+"330","Kirkcaldy, Scotland",2
+"336","Launceston, England",2
+"341","Leigh-on-Sea, England",2
+"343","Letchworth, England",2
+"348","Lisburn, Northern Ireland",2
+"359","Lossiemouth, Scotland",2
+"365","Lydney, England",2
+"367","Lyndhurst, England",2
+"380","Margate, England",2
+"383","Market Rasen, England",2
+"387","Mauchline, Scotland",2
+"390","Merthyr Tydfil, Wales",2
+"394","Midhurst, England",2
+"397","Mold, Wales",2
+"403","Neath, Wales",2
+"406","New Romney, England",2
+"409","Newbury, England",2
+"411","Newent, England",2
+"414","Newton Abbot, England",2
+"415","Newton Aycliffe, England",2
+"420","Northallerton, England",2
+"428","Orkney, Scotland",2
+"433","Paisley, Scotland",2
+"440","Pentre, Wales",2
+"441","Penysarn, Wales",2
+"444","Petersfield, England",2
+"445","Pewsey, England",2
+"450","Pontypool, Wales",2
+"451","Pontypridd, Wales",2
+"454","Port Talbot, Wales",2
+"455","Porth, Wales",2
+"462","Purley, England",2
+"463","Queenborough, England",2
+"471","Redhill, England",2
+"473","Reigate, England",2
+"488","Rye, England",2
+"489","Saffron Walden, England",2
+"498","Scunthorpe, England",2
+"506","Shipley, England",2
+"508","Shoreham-by-Sea, England",2
+"510","Shrewsbury, England",2
+"511","Sidcup, England",2
+"513","Skegness, England",2
+"524","Southminster, England",2
+"526","Southsea, England",2
+"532","St Neots, England",2
+"550","Surbiton, England",2
+"554","Swadlincote, England",2
+"568","Tidworth, England",2
+"574","Totnes, England",2
+"575","Towcester, England",2
+"576","Tredegar, Wales",2
+"577","Tring, England",2
+"582","Uckfield, England",2
+"585","Uttoxeter, England",2
+"586","Uxbridge, England",2
+"593","Wantage, England",2
+"613","Whitstable, England",2
+"616","Wigan, England",2
+"618","Wigton, England",2
+"621","Wimborne, England",2
+"622","Winchester, England",2
+"623","Windsor, England",2
+"629","Witney, England",2
+"631","Wokingham, England",2
+"635","Worcester, England",2
+"638","Worthing, England",2
+"639","Wrexham, Wales",2
+"640","Wymondham, England",2
+"1","Abbots Langley, England",1
+"2","Aberdare, Wales",1
+"9","Alford, England",1
+"10","Alford, Scotland",1
+"14","Alton, England",1
+"15","Altrincham, England",1
+"20","Ashbourne, England",1
+"22","Ashington, England",1
+"23","Ashton-under-Lyne, England",1
+"26","Bacup, England",1
+"27","Bakewell, England",1
+"28","Ballater, Scotland",1
+"29","Ballyclare, Northern Ireland",1
+"31","Ballymoney, Northern Ireland",1
+"32","Banbury, England",1
+"33","Banff, Scotland",1
+"34","Bangor, Northern Ireland",1
+"35","Bangor, Wales",1
+"41","Barton upon Humber, England",1
+"48","Beccles, England",1
+"49","Bedale, England",1
+"53","Berwick-upon-Tweed, England",1
+"54","Beverley, England",1
+"55","Bewdley, England",1
+"57","Bexleyheath, England",1
+"58","Bicester, England",1
+"60","Biggleswade, England",1
+"62","Billingham, England",1
+"63","Billingshurst, England",1
+"65","Birchington, England",1
+"66","Birkenhead, England",1
+"72","Blackwood, Wales",1
+"73","Blaenavon, Wales",1
+"75","Bo'Ness, Scotland",1
+"86","Braunton, England",1
+"87","Brecon, Wales",1
+"92","Bridport, England",1
+"93","Brierley Hill, England",1
+"94","Brigg, England",1
+"97","Brixham, England",1
+"98","Broadstairs, England",1
+"99","Bromley, England",1
+"100","Bromsgrove, England",1
+"102","Broxburn, Scotland",1
+"103","Buckingham, England",1
+"105","Bures, England",1
+"108","Burntisland, Scotland",1
+"113","Caernarfon, Wales",1
+"118","Camelford, England",1
+"126","Castleford, England",1
+"127","Catterick Garrison, England",1
+"128","Chard, England",1
+"130","Chatteris, England",1
+"133","Chesham, England",1
+"137","Chichester, England",1
+"140","Chipping Norton, England",1
+"141","Chislehurst, England",1
+"144","Church Stretton, England",1
+"145","Cirencester, England",1
+"147","Cleckheaton, England",1
+"148","Cleethorpes, England",1
+"150","Coalville, England",1
+"151","Coatbridge, Scotland",1
+"153","Coldstream, Scotland",1
+"155","Colne, England",1
+"156","Colyton, England",1
+"158","Consett, England",1
+"159","Conwy, Wales",1
+"160","Cookstown, Northern Ireland",1
+"164","Cowbridge, Wales",1
+"166","Cramlington, England",1
+"167","Cranbrook, England",1
+"169","Crediton, England",1
+"171","Crook, England",1
+"174","Cullompton, England",1
+"178","Dalkeith, Scotland",1
+"181","Deal, England",1
+"190","Dorking, England",1
+"200","Dungannon, Northern Ireland",1
+"204","Dursley, England",1
+"205","Dymock, England",1
+"206","East Grinstead, England",1
+"207","East Molesey, England",1
+"210","Ebbw Vale, Wales",1
+"211","Edenbridge, England",1
+"213","Elgin, Scotland",1
+"217","Epping, England",1
+"227","Farnborough, England",1
+"228","Felixstowe, England",1
+"230","Ferndale, Wales",1
+"235","Forfar, Scotland",1
+"236","Forres, Scotland",1
+"237","Fraserburgh, Scotland",1
+"239","Gatwick, England",1
+"244","Glastonbury, England",1
+"246","Glossop, England",1
+"249","Godstone, England",1
+"250","Goole, England",1
+"251","Gorebridge, Scotland",1
+"253","Grangemouth, Scotland",1
+"254","Grantham, England",1
+"257","Great Malvern, England",1
+"258","Great Missenden, England",1
+"260","Greenford, England",1
+"262","Grimsby, England",1
+"264","Hailsham, England",1
+"266","Halesworth, England",1
+"270","Hampton, England",1
+"271","Harleston, England",1
+"273","Harrogate, England",1
+"276","Haslemere, England",1
+"278","Hatfield, England",1
+"280","Haverhill, England",1
+"281","Hawick, Scotland",1
+"283","Haywards Heath, England",1
+"284","Heckmondwike, England",1
+"287","Hengoed, Wales",1
+"288","Henley-on-Thames, England",1
+"290","Hertford, England",1
+"291","Hessle, England",1
+"294","Highbridge, England",1
+"295","Hitchin, England",1
+"296","Hockley, England",1
+"298","Holsworthy, England",1
+"299","Holt, England",1
+"300","Honiton, England",1
+"302","Horley, England",1
+"309","Hunstanton, England",1
+"317","Isle of Skye, Scotland",1
+"319","Ivybridge, England",1
+"320","Jarrow, England",1
+"325","Kidlington, England",1
+"331","Knaresborough, England",1
+"332","Knighton, Wales",1
+"333","Lancaster, England",1
+"334","Lancing, England",1
+"335","Larne, Northern Ireland",1
+"344","Lewes, England",1
+"345","Lifton, England",1
+"347","Linlithgow, Scotland",1
+"349","Littlehampton, England",1
+"351","Llandysul, Wales",1
+"352","Llanelli, Wales",1
+"353","Llangollen, Wales",1
+"354","Loanhead, Scotland",1
+"355","Lochgelly, Scotland",1
+"357","Londonderry, Northern Ireland",1
+"358","Looe, England",1
+"360","Loughborough, England",1
+"364","Lutterworth, England",1
+"368","Lytham St Annes, England",1
+"370","Machynlleth, Wales",1
+"371","Maesteg, Wales",1
+"374","Malmesbury, England",1
+"377","Manningtree, England",1
+"381","Market Drayton, England",1
+"382","Market Harborough, England",1
+"384","Marlborough, England",1
+"385","Martock, England",1
+"386","Matlock, England",1
+"389","Melton Mowbray, England",1
+"393","Middlewich, England",1
+"396","Mitcham, England",1
+"398","Morden, England",1
+"399","Morecambe, England",1
+"400","Morpeth, England",1
+"401","Motherwell, Scotland",1
+"402","Nantwich, England",1
+"405","New Alresford, England",1
+"412","Newport, England",1
+"416","Newtonmore, Scotland",1
+"418","North Shields, England",1
+"419","North Walsham, England",1
+"422","Northwich, England",1
+"426","Okehampton, England",1
+"430","Ossett, England",1
+"432","Paignton, England",1
+"434","Pathhead, Scotland",1
+"435","Peebles, Scotland",1
+"436","Pembroke, Wales",1
+"437","Penarth, Wales",1
+"438","Penrith, England",1
+"439","Penryn, England",1
+"446","Pinner, England",1
+"453","Port Glasgow, Scotland",1
+"457","Poulton-le-Fylde, England",1
+"458","Prestatyn, Wales",1
+"459","Presteigne, Wales",1
+"461","Pudsey, England",1
+"464","Radstock, England",1
+"470","Redditch, England",1
+"476","Riding Mill, England",1
+"477","Ripley, England",1
+"484","Royston, England",1
+"486","Rugeley, England",1
+"487","Ryde, England",1
+"490","Sale, England",1
+"493","Saltcoats, Scotland",1
+"494","Sandy, England",1
+"495","Saxmundham, England",1
+"497","Scotland",1
+"500","Sevenoaks, England",1
+"501","Shaftesbury, England",1
+"505","Shifnal, England",1
+"509","Shotts, Scotland",1
+"515","Sleaford, England",1
+"517","Smethwick, England",1
+"519","South Ockendon, England",1
+"521","Southall, England",1
+"525","Southport, England",1
+"530","St Columb, England",1
+"535","Stalybridge, England",1
+"536","Stamford, England",1
+"537","Stanley, England",1
+"539","Stirling, Scotland",1
+"543","Stourbridge, England",1
+"544","Stowmarket, England",1
+"548","Sunbury on Thames, England",1
+"557","Tamworth, England",1
+"559","Tavistock, England",1
+"562","Tenby, Wales",1
+"564","Thatcham, England",1
+"566","Thornton Heath, England",1
+"567","Thurso, Scotland",1
+"569","Tilbury, England",1
+"570","Todmorden, England",1
+"571","Tonbridge, England",1
+"572","Tonypandy, Wales",1
+"573","Torquay, England",1
+"578","Troon, Scotland",1
+"580","Twickenham, England",1
+"581","Tyn-Y-Gongl, Wales",1
+"584","Upminster, England",1
+"588","Wales",1
+"591","Walton on the Naze, England",1
+"594","Ware, England",1
+"599","Watford, England",1
+"602","Wellington, England",1
+"603","Wells, England",1
+"604","Welwyn Garden City, England",1
+"607","West Malling, England",1
+"608","West Molesey, England",1
+"610","Westhill, Scotland",1
+"614","Wickford, England",1
+"615","Widnes, England",1
+"617","Wigston, England",1
+"619","Willenhall, England",1
+"620","Wilmslow, England",1
+"624","Wingate, England",1
+"628","Witham, England",1
+"636","Workington, England",1
